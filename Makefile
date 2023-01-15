@@ -7,14 +7,32 @@ PATH_OBJS = ./objects/
 PATH_SRCS = ./sources/
 
 SRCS_ENC = $(addprefix $(PATH_SRCS),\
-		encoder.c)
+		encoder.c\
+		compress.c\
+		encode.c\
+		get_str_size.c\
+		share_info.c\
+		dictionary_clear.c\
+		dictionary_create.c\
+		dictionary_init.c\
+		dictionary_print.c\
+		list_create.c\
+		list_fill.c\
+		list_node_new.c\
+		list_node_remove.c\
+		list_print.c\
+		list_sorted_insert.c\
+		tree_build.c\
+		tree_free.c\
+		tree_height.c\
+		tree_print.c)
 SRCS_DEC = $(addprefix $(PATH_SRCS),\
+		decompress.c\
+		decode.c\
 		decoder.c)
 
 OBJS_ENC = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS_ENC))
 OBJS_DEC = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS_DEC))
-
-LIBFT = $(PATH_LIBS)libft.a
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
@@ -40,7 +58,6 @@ clean:
 fclean: clean
 	@rm $(ENC)
 	@rm $(DEC)
-	@make fclean -C $(PATH_LIBS)
 
 re: fclean all
 

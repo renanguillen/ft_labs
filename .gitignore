@@ -1,0 +1,4 @@
+*.o
+encoder
+decoder
+.nfs*
