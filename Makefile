@@ -11,7 +11,6 @@ SRCS_ENC = $(addprefix $(PATH_SRCS),\
 		compress.c\
 		encode.c\
 		get_str_size.c\
-		share_info.c\
 		dictionary_clear.c\
 		dictionary_create.c\
 		dictionary_init.c\
@@ -22,6 +21,7 @@ SRCS_ENC = $(addprefix $(PATH_SRCS),\
 		list_node_remove.c\
 		list_print.c\
 		list_sorted_insert.c\
+		shm_encoder.c\
 		tree_build.c\
 		tree_free.c\
 		tree_height.c\

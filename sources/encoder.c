@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:41:18 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/01/14 23:03:41 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/01/15 09:20:50 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,77 +60,25 @@ void	clean_quit(char **dict, t_list *list, t_node *tree, int *freq_table, char *
 
 int main(void)
 {
-	char	*str;
-	int		*freq_table;
-	t_list	*list;
-	t_node	*tree;
-	int		height;
-	char	**dict;
-	char	*code;
-	char	*bin;
+	t_data	*data;
 
-	int		shm_id1;
-	int		shm_id2;
-	key_t	mem_key1;
-	key_t	mem_key2;
-	char	*shm_text;
-	int		*shm_int;
-	int		i = 0;
-
-	mem_key1 = 1234;
-	mem_key2 = 4321;
-	str = read_file(open("infile.txt", O_RDWR));
-	freq_table = count_sym(str);
-	list = create_list();
-	fill_list(freq_table, list);
-	tree = build_tree(list);
-	height = tree_height(tree);
-	dict = init_dict(height + 1);
-	create_dict(dict, tree, "", height);
-	code = encode(dict, str);
-	printf("String codificada:%s\n", code);
-	bin = compress(code);
-	printf("\nString compactada:%s\n", bin);
-	//abrindo espaço de memória
-	shm_id1 = shmget(mem_key1, SIZE, IPC_CREAT | 0666);
-	if (shm_id1 < 0)
-		{perror("smhget error (server)\n");exit (1);}
-	shm_text = shmat(shm_id1, NULL, 0);
-	if (shm_text == (char *) -1)
-		{perror("smhget error (server)\n");exit (1);}
-	shm_id2 = shmget(mem_key2, SIZE, IPC_CREAT | 0666);
-	if (shm_id2 < 0)
-		{perror("smhget error (server)\n");exit (1);}
-	shm_int = shmat(shm_id2, NULL, 0);
-	if (shm_int == (int *)-1)
-		{perror("smhget error (server)\n");exit (1);}
-
-	*shm_int = 0;
-	memcpy(shm_text, code, strlen(code));
-	shm_text[strlen(code)] = 0;
-	*(shm_int + 1) = 1;
-	while(*shm_int == 0){}
-
-	*shm_int = 0;
-	memcpy(shm_text, bin, strlen(bin));
-	shm_text[strlen(bin)] = 0;
-	*(shm_int + 1) = 1;
-	while(*shm_int == 0){}
-
-	while(i < 128)
-	{
-		*shm_int = 0;
-		memcpy(shm_text, dict[i], strlen(dict[i]));
-		shm_text[strlen(dict[i])] = 0;
-		*(shm_int + 1) = 1;
-		while(*shm_int == 0){}
-		i++;
-	}
-	*(shm_int + 1) = 1;
-	clean_quit(dict, list, tree, freq_table, str, code);
-	shmdt(shm_text);
-	shmdt(shm_int);
-	shmctl(shm_id1, IPC_RMID, NULL);
-	shmctl(shm_id2, IPC_RMID, NULL);
+	data = (t_data *)calloc(1, sizeof(t_data));
+	data->str = read_file(open("infile.txt", O_RDWR));
+	if (strlen(data->str) == 0)
+		return (1);
+	data->freq_table = count_sym(data->str);
+	data->list = create_list();
+	fill_list(data->freq_table, data->list);
+	data->tree = build_tree(data->list);
+	data->height = tree_height(data->tree);
+	data->dict = init_dict(data->height + 1);
+	create_dict(data->dict, data->tree, "", data->height);
+	data->code = encode(data->dict, data->str);
+	// printf("String codificada:%s\n", data->code);
+	data->bin = compress(data->code);
+	// printf("\nString compactada:%s\n", data->bin);
+	shm_encoder(data);
+	clean_quit(data->dict, data->list, data->tree,
+				data->freq_table, data->str, data->code);
 	return (0);
 }

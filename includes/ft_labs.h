@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:41:06 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/01/15 00:26:13 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/01/15 09:16:44 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 # define FT_LABS_H
 
 # define SIZE 100
+
+# include <stdlib.h>
+# include <stdio.h>
+# include <string.h>
+# include <sys/types.h>
+# include <sys/ipc.h>
+# include <sys/shm.h>
+# include <unistd.h>
+# include <fcntl.h>
 
 typedef struct s_node
 {
@@ -30,14 +39,28 @@ typedef struct s_list
 	int		size;
 }	t_list;
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <sys/types.h>
-# include <sys/ipc.h>
-# include <sys/shm.h>
-# include <unistd.h>
-# include <fcntl.h>
+typedef struct s_data
+{
+	char	*str;
+	int		*freq_table;
+	t_list	*list;
+	t_node	*tree;
+	int		height;
+	char	**dict;
+	char	*code;
+	char	*bin;
+}	t_data;
+
+typedef struct s_shm
+{
+	int		id1;
+	int		id2;
+	key_t	key1;
+	key_t	key2;
+	char	*text;
+	int		*numb;
+}	t_shm;
+
 
 t_list	*create_list();
 void	sorted_insert(t_list *list, t_node *node);
@@ -59,6 +82,7 @@ char	*decode(char *str, char**dict);
 char	*compress(char *code);
 char	*decompress(char *zip, int len);
 int		get_str_size(char **dict, char *str);
+void	shm_encoder(t_data *data);
 
 
 #endif
