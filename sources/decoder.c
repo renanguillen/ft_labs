@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:41:13 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/01/15 09:13:49 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/01/15 09:54:17 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	main(void)
 	char	*new_str;
 	int		len = 0;
 
-	mem_key1 = 1234;
-	mem_key2 = 4321;
+	mem_key1 = ftok(".shmkey1", SIZE);
+	mem_key2 = ftok(".shmkey2", SIZE);
 	shm_id1 = shmget(mem_key1, SIZE, 0666);
 	if (shm_id1 < 0)
 		{perror("smhget error (client)\n");exit (1);}

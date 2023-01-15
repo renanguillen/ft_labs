@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 09:15:48 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/01/15 09:41:49 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/01/15 09:53:59 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	shm_get_memory(t_shm *shm)
 {
-	shm->key1 = 1234;
-	shm->key2 = 4321;
+	shm->key1 = ftok(".shmkey1", SIZE);
+	shm->key2 = ftok(".shmkey2", SIZE);
 	shm->id1 = shmget(shm->key1, SIZE, IPC_CREAT | 0666);
 	if (shm->id1 < 0)
 		{perror("smhget error (server)\n");exit (1);}
