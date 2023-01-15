@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:53:44 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/01/14 14:53:57 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/01/14 23:10:52 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*encode(char **dict, char *str)
 
 	i = 0;
 	size = get_str_size(dict, str);	
-	code = calloc(size, sizeof(char)); // será q aqui n é size + 1?
+	code = calloc(size, sizeof(char));
 	while(str[i])
 	{
 		strcat(code, dict[(int)(str[i])]);

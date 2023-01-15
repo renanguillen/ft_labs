@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:41:18 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/01/14 22:47:08 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/01/14 23:03:41 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	clean_quit(char **dict, t_list *list, t_node *tree, int *freq_table, char *
 	free(code);
 }
 
-int main(int ac, char **av)
+int main(void)
 {
-	(void)ac;
+	char	*str;
 	int		*freq_table;
 	t_list	*list;
 	t_node	*tree;
@@ -79,17 +79,18 @@ int main(int ac, char **av)
 
 	mem_key1 = 1234;
 	mem_key2 = 4321;
-	freq_table = count_sym(av[1]);
+	str = read_file(open("infile.txt", O_RDWR));
+	freq_table = count_sym(str);
 	list = create_list();
 	fill_list(freq_table, list);
 	tree = build_tree(list);
 	height = tree_height(tree);
 	dict = init_dict(height + 1);
 	create_dict(dict, tree, "", height);
-	code = encode(dict, av[1]);
-	// printf("String codificada:%s\n", code);
+	code = encode(dict, str);
+	printf("String codificada:%s\n", code);
 	bin = compress(code);
-	// printf("\nString compactada:%s\n", bin);
+	printf("\nString compactada:%s\n", bin);
 	//abrindo espaço de memória
 	shm_id1 = shmget(mem_key1, SIZE, IPC_CREAT | 0666);
 	if (shm_id1 < 0)
@@ -126,7 +127,7 @@ int main(int ac, char **av)
 		i++;
 	}
 	*(shm_int + 1) = 1;
-	clean_quit(dict, list, tree, freq_table, av[1], code);
+	clean_quit(dict, list, tree, freq_table, str, code);
 	shmdt(shm_text);
 	shmdt(shm_int);
 	shmctl(shm_id1, IPC_RMID, NULL);

@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:53:10 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/01/14 21:36:26 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/01/14 23:39:41 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char	*decode(char *str, char**dict)
 	char	c[2];
 	
 	j = 0;
-	new_str = NULL;
 	new_str = calloc(strlen(str), sizeof(char));
 	while(*str)
 	{

@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:41:06 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/01/14 22:54:07 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/01/15 00:26:13 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	free_tree(t_node *tree);
 char	*encode(char **dict, char *str);
 char	*decode(char *str, char**dict);
 char	*compress(char *code);
-char	*decompress(char *zip);
+char	*decompress(char *zip, int len);
 int		get_str_size(char **dict, char *str);
 
 

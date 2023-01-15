@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:41:13 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/01/14 22:38:22 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/01/15 00:25:51 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(void)
 	while(i < 128)
 	{
 		*(shm_int + 1) = 0;
-		dict[i] = (char *)calloc(8, sizeof(char));
+		dict[i] = (char *)calloc(1000, sizeof(char));
 		dict[i] = strcpy(dict[i], shm_text);
 		*shm_int = 1;
 		while(*(shm_int + 1) == 0){}
@@ -73,7 +73,7 @@ int	main(void)
 		i++;
 	}
 	
-	new_code = decompress(compact);
+	new_code = decompress(compact, strlen(bin));
 	printf("\nString codificada:%s\n", new_code);
 	new_str = decode(new_code, dict);
 	printf("\nString original: %s\n", new_str);

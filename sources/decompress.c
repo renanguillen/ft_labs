@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 21:49:38 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/01/14 22:00:23 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/01/15 00:25:07 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	is_one(char byte, int i)
 	return byte & aux;
 }
 
-char	*decompress(char *zip)
+char	*decompress(char *zip, int len)
 {
 	int		i;
 	int		pos;
@@ -30,8 +30,8 @@ char	*decompress(char *zip)
 
 	i = 0;
 	pos = 7;
-	str = calloc(strlen(zip) * 8, sizeof(char));
-	res = strlen(zip) % 8;
+	str = calloc(len, sizeof(char));
+	res = len % 8;
 	if (res == 0)
 	{
 		while(zip[i])
@@ -50,7 +50,7 @@ char	*decompress(char *zip)
 	}
 	else
 	{
-		while(i < ((int)(strlen(zip)) - res) && zip[i])
+		while((strlen(str) < (unsigned long)(len - res)) && zip[i])
 		{
 			while(pos >= 0)
 			{
