@@ -6,13 +6,13 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 14:52:13 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/01/14 21:59:26 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/01/15 10:38:23 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_labs.h"
 
-char	*compress(char *code)
+char	*huffman_compress(char *code)
 {
 	int		i;
 	char	byte;

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tree.c                                             :+:      :+:    :+:   */
+/*   tree_build.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 16:57:29 by guribeir          #+#    #+#             */
-/*   Updated: 2023/01/14 12:49:58 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/01/15 10:33:10 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_labs.h"
 
-t_node	*build_tree(t_list *list)
+t_node	*tree_build(t_list *list)
 {
 	t_node	*n1;
 	t_node	*n2;
@@ -20,8 +20,8 @@ t_node	*build_tree(t_list *list)
 
 	while(list->size > 1)
 	{
-		n1 = remove_node(list);
-		n2 = remove_node(list);
+		n1 = list_node_remove(list);
+		n2 = list_node_remove(list);
 		new = calloc(sizeof(t_node), 1);
 		if (!new)
 			return(NULL);
@@ -30,7 +30,7 @@ t_node	*build_tree(t_list *list)
 		new->left = n1;
 		new->right = n2;
 		new->next = NULL;
-		sorted_insert(list, new);
+		list_sorted_insert(list, new);
 	}
 	return (list->start);
 }

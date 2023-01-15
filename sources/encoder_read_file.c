@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dictionary_print.c                                 :+:      :+:    :+:   */
+/*   encoder_read_file.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/14 13:11:48 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/01/14 13:11:59 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/01/15 10:42:05 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/01/15 10:42:52 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_labs.h"
 
-void	print_dict(char **dict)
+char	*encoder_read_file(int fd)
 {
-	int	i;
+	char	*str;
+	char	buf[1];
+	int		i;
 
+	str = NULL;
 	i = 0;
-	printf("\n\t-------Dicionário -------\n");
-	while(i < 128)
-	{
-		if (strlen(dict[i]) > 0)
-			printf("\t%d: %s\n", i, dict[i]);
+	while (read(fd, buf, 1))
 		i++;
-	}
+	str = calloc(1, i + 1);
+	close(fd);
+	open("infile.txt", O_RDWR);
+	read(fd, str, i);
+	str[i] = '\0';
+	return (str);
 }

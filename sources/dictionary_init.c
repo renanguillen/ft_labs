@@ -6,13 +6,13 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 17:42:02 by guribeir          #+#    #+#             */
-/*   Updated: 2023/01/14 13:11:46 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/01/15 10:26:51 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_labs.h"
 
-char	**init_dict(int	height)
+char	**dictionary_init(int	height)
 {
 	char	**dict;
 	int		i;

@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   decode.c                                           :+:      :+:    :+:   */
+/*   encode.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/14 14:53:10 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/01/14 23:39:41 by ridalgo-         ###   ########.fr       */
+/*   Created: 2023/01/14 14:53:44 by ridalgo-          #+#    #+#             */
+/*   Updated: 2023/01/15 10:36:01 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_labs.h"
 
-char	*decode(char *str, char**dict)
+char	*huffman_binary(char **dict, char *str)
 {
-	char	*new_str;
-	int		j;
-	char	c[2];
-	
-	j = 0;
-	new_str = calloc(strlen(str), sizeof(char));
-	while(*str)
+	char	*code;
+	int		i;
+	int		size;
+
+	i = 0;
+	size = get_str_size(dict, str);	
+	code = calloc(size, sizeof(char));
+	while(str[i])
 	{
-		if (strlen(dict[j]) > 0)
-		{
-			if(strncmp(dict[j], (str), strlen(dict[j])) == 0)
-			{
-				c[0] = j;
-				c[1] = '\0';
-				strncat(new_str, c, 1);
-				str += strlen(dict[j]);
-				j = -1;
-			}
-		}
-		j++;
+		strcat(code, dict[(int)(str[i])]);
+		i++;
 	}
-	return (new_str);
+	return (code);
 }

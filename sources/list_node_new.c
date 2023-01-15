@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_newnode.c                                     :+:      :+:    :+:   */
+/*   list_node_new.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 12:58:03 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/01/14 12:58:44 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/01/15 10:34:31 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_labs.h"
 
-t_node	*create_node(int *freq_table, int *i)
+t_node	*list_node_new(int *freq_table, int *i)
 {
 	t_node	*new_node;
 

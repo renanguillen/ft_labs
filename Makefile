@@ -8,27 +8,26 @@ PATH_SRCS = ./sources/
 
 SRCS_ENC = $(addprefix $(PATH_SRCS),\
 		encoder.c\
-		compress.c\
-		encode.c\
 		get_str_size.c\
+		huffman_action.c\
+		huffman_binary.c\
+		huffman_compress.c\
 		dictionary_clear.c\
 		dictionary_create.c\
 		dictionary_init.c\
-		dictionary_print.c\
 		list_create.c\
 		list_fill.c\
 		list_node_new.c\
 		list_node_remove.c\
-		list_print.c\
 		list_sorted_insert.c\
+		encoder_read_file.c\
 		encoder_shm.c\
 		tree_build.c\
 		tree_free.c\
-		tree_height.c\
-		tree_print.c)
+		tree_height.c)
 SRCS_DEC = $(addprefix $(PATH_SRCS),\
-		decompress.c\
-		decode.c\
+		decoder_decompress.c\
+		decoder_shm.c\
 		decoder.c)
 
 OBJS_ENC = $(patsubst $(PATH_SRCS)%.c, $(PATH_OBJS)%.o, $(SRCS_ENC))
