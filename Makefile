@@ -21,7 +21,7 @@ SRCS_ENC = $(addprefix $(PATH_SRCS),\
 		list_node_remove.c\
 		list_print.c\
 		list_sorted_insert.c\
-		shm_encoder.c\
+		encoder_shm.c\
 		tree_build.c\
 		tree_free.c\
 		tree_height.c\

@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:41:06 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/01/15 09:16:44 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/01/15 09:42:44 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_list
 
 typedef struct s_data
 {
-	char	*str;
+	char	*text;
 	int		*freq_table;
 	t_list	*list;
 	t_node	*tree;
@@ -82,7 +82,7 @@ char	*decode(char *str, char**dict);
 char	*compress(char *code);
 char	*decompress(char *zip, int len);
 int		get_str_size(char **dict, char *str);
-void	shm_encoder(t_data *data);
+void	encoder_shm(t_data *data);
 
 
 #endif

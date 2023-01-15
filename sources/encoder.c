@@ -6,7 +6,7 @@
 /*   By: ridalgo- <ridalgo-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:41:18 by ridalgo-          #+#    #+#             */
-/*   Updated: 2023/01/15 09:20:50 by ridalgo-         ###   ########.fr       */
+/*   Updated: 2023/01/15 09:44:30 by ridalgo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ int	*count_sym(char *str)
 	return (freq_table);
 }
 
-void	clean_quit(char **dict, t_list *list, t_node *tree, int *freq_table, char *str, char *code)
+void	clean_quit(t_data *data)
 {
-	clear_dict(dict);
-	free(list);
-	free_tree(tree);
-	free(freq_table);
-	free(str);
-	free(code);
+	clear_dict(data->dict);
+	free(data->list);
+	free_tree(data->tree);
+	free(data->freq_table);
+	free(data->text);
+	free(data->code);
 }
 
 int main(void)
@@ -63,22 +63,21 @@ int main(void)
 	t_data	*data;
 
 	data = (t_data *)calloc(1, sizeof(t_data));
-	data->str = read_file(open("infile.txt", O_RDWR));
-	if (strlen(data->str) == 0)
+	data->text = read_file(open("infile.txt", O_RDWR));
+	if (strlen(data->text) == 0)
 		return (1);
-	data->freq_table = count_sym(data->str);
+	data->freq_table = count_sym(data->text);
 	data->list = create_list();
 	fill_list(data->freq_table, data->list);
 	data->tree = build_tree(data->list);
 	data->height = tree_height(data->tree);
 	data->dict = init_dict(data->height + 1);
 	create_dict(data->dict, data->tree, "", data->height);
-	data->code = encode(data->dict, data->str);
+	data->code = encode(data->dict, data->text);
 	// printf("String codificada:%s\n", data->code);
 	data->bin = compress(data->code);
 	// printf("\nString compactada:%s\n", data->bin);
-	shm_encoder(data);
-	clean_quit(data->dict, data->list, data->tree,
-				data->freq_table, data->str, data->code);
+	encoder_shm(data);
+	clean_quit(data);
 	return (0);
 }
